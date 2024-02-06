@@ -8,19 +8,36 @@ import 'package:polaris_map_editor/options/place_options.dart';
 import 'package:polaris_map_editor/options/point_options.dart';
 import 'package:polaris_map_editor/options/shortcut_options.dart';
 
+/// Class that defines the overall customization options for the `PolarisMapEditor`.
 class PolarisOptions {
+  /// Customization options for areas.
   final AreaOptions area;
 
+  /// Customization options for lines.
   final LineOptions line;
+
+  /// Customization options for dragged lines.
   final LineOptions draggedLine;
+
+  /// Customization options for points.
   final PointOptions point;
+
+  /// Customization options for place search (optional).
   final PlaceOptions? place;
+
+  /// Customization options for mouse interaction.
   final MouseOptions mouse;
+
+  /// Customization options for keyboard shortcuts.
   final ShortcutOptions shortcut;
+
+  /// Customization options for the context menu.
   final MenuOptions menu;
 
+  /// Indicates whether place search is enabled (place != null).
   bool get isEnabledPlace => place != null;
 
+  /// Default constructor.
   const PolarisOptions({
     required this.area,
     required this.line,
@@ -32,6 +49,7 @@ class PolarisOptions {
     this.mouse = const MouseOptions(),
   });
 
+  /// Factory that creates a `PolarisOptions` object with default options.
   factory PolarisOptions.defaultOptions({
     Color color = Colors.blue,
     String? googlePlaceApiKey,

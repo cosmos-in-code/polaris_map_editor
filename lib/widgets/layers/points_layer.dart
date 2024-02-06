@@ -6,9 +6,12 @@ import 'package:galactic_hotkeys/galactic_hotkeys.dart';
 import 'package:polaris_map_editor/bloc/editor/editor_bloc.dart';
 import 'package:polaris_map_editor/options/polaris_options.dart';
 
+/// Widget responsible for displaying and managing point interactions on the map.
 class PointsLayer extends StatelessWidget {
+  /// Configuration options for the points' appearance and behavior.
   final PolarisOptions options;
 
+  /// Creates a PointsLayer with the specified options.
   const PointsLayer({
     super.key,
     required this.options,

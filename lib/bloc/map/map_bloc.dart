@@ -6,9 +6,12 @@ import 'package:latlong2/latlong.dart';
 part 'map_event.dart';
 part 'map_state.dart';
 
+/// A BLoC for managing the state of a map.
 class MapBloc extends Bloc<MapEvent, MapState> {
+  /// The controller for the map.
   final MapController mapController;
 
+  /// Creates a MapBloc instance with the specified map controller.
   MapBloc({
     required this.mapController,
   }) : super(MapState(mapController: mapController)) {

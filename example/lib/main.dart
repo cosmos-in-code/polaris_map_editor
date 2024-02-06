@@ -6,11 +6,12 @@ import 'package:polaris_map_editor/polaris_map_editor.dart';
 import 'package:polaris_map_editor/polaris_map_editor_dependencies.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Example());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// An example of how to use the PolarisMapEditor widget.
+class Example extends StatelessWidget {
+  const Example({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +22,20 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: Editor(),
+      home: const Editor(),
     );
   }
 }
 
 class Editor extends StatefulWidget {
-  Editor({super.key});
+  const Editor({super.key});
 
   @override
   State<Editor> createState() => _EditorState();
 }
 
 class _EditorState extends State<Editor> {
+  /// A flutter map controller used to control the map.
   final mapController = MapController();
 
   @override
@@ -50,13 +52,13 @@ class _EditorState extends State<Editor> {
               ? Config.googlePlaceIosKey
               : Config.googlePlaceAndroidKey,
         ),
-        onAreaChanged: (area) => print(area),
+        onAreaChanged: print,
         child: FlutterMap(
           mapController: mapController,
           options: MapOptions(
             interactionOptions: InteractionOptions(
               cursorKeyboardRotationOptions:
-                  CursorKeyboardRotationOptions.disabled(),
+                  CursorKeyboardRotationOptions.disabled(), // prevent shortcuts
             ),
           ),
           children: [
@@ -64,7 +66,7 @@ class _EditorState extends State<Editor> {
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'com.cosmos-in-code.polaris_map_editor',
             ),
-            const PolarisLayer(),
+            const PolarisLayer(), // <===== Polaris widget
           ],
         ),
       ),

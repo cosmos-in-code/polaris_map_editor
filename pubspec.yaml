@@ -15,9 +15,7 @@ dependencies:
   flutter_bloc: ^8.1.3
   flutter_google_maps_webservices: ^1.1.1
   flutter_map: ^6.1.0
-#  galactic_hotkeys: ^1.1.0
-  galactic_hotkeys:
-    path: ../galactic_hotkeys
+  galactic_hotkeys: ^1.1.1
   latlong2: ^0.9.0
   provider: ^6.1.1
 

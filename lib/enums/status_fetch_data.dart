@@ -1,3 +1,4 @@
+/// StatusFetchData enum for handling status of fetching data
 enum StatusFetchData {
   initial,
   fetching,

@@ -8,7 +8,9 @@ import 'package:polaris_map_editor/support/helpers.dart';
 part 'editor_event.dart';
 part 'editor_state.dart';
 
+/// A BLoC for managing the state of an editor for editing points on a map.
 class EditorBloc extends Bloc<EditorEvent, EditorState> {
+  // Store the line stroke width for calculations.
   final double lineStrokeWidth;
 
   EditorBloc({
@@ -189,6 +191,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
     });
   }
 
+  /// Creates a new snapshot of the editor state with the given point added.
   Editor _createSnapshot(LatLng point) {
     final current = state.snapshots.isNotEmpty ? state.snapshots.last : null;
     if (current == null) {
@@ -198,6 +201,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
     return Editor([...current.points, point]);
   }
 
+  /// Checks if the given point is on a line segment.
   bool _isPointOnLine(LatLng point) {
     final points = state.current?.points ?? [];
 

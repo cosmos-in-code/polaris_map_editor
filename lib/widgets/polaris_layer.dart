@@ -5,7 +5,9 @@ import 'package:polaris_map_editor/widgets/layers/area_layer.dart';
 import 'package:polaris_map_editor/widgets/layers/lines_layer.dart';
 import 'package:polaris_map_editor/widgets/layers/points_layer.dart';
 
+/// Widget responsible for displaying the Polaris map editor layers. Includes AreaLayer, LinesLayer and PointsLayer.
 class PolarisLayer extends StatelessWidget {
+  /// Creates a PolarisLayer.
   const PolarisLayer({
     super.key,
   });

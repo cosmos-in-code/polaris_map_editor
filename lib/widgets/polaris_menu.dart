@@ -8,9 +8,12 @@ import 'package:polaris_map_editor/widgets/menu/undo_button.dart';
 import 'package:polaris_map_editor/widgets/menu/zoom_in_button.dart';
 import 'package:polaris_map_editor/widgets/menu/zoom_out_button.dart';
 
+/// Widget responsible for displaying the Polaris map editor menu. Includes UndoButton, RedoButton, ZoomOutButton, ZoomInButton, FitCameraToAreaButton and (optional) SearchPlaceButton.
 class PolarisMenu extends StatelessWidget {
+  /// Configuration options for the map editor.
   final PolarisOptions options;
 
+  /// Creates a PolarisMenu with the specified options.
   const PolarisMenu({
     super.key,
     required this.options,

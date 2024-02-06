@@ -5,9 +5,12 @@ import 'package:polaris_map_editor/bloc/map/map_bloc.dart';
 import 'package:polaris_map_editor/bloc/place/place_bloc.dart';
 import 'package:polaris_map_editor/options/polaris_options.dart';
 
+/// Widget responsible for displaying the Polaris search places autocomplete functionality.
 class PolarisSearchPlacesAutocomplete extends StatefulWidget {
+  /// Configuration options for the search places autocomplete.
   final PolarisOptions options;
 
+  /// Creates a [PolarisSearchPlacesAutocomplete] with the specified options.
   const PolarisSearchPlacesAutocomplete({
     super.key,
     required this.options,
@@ -20,26 +23,44 @@ class PolarisSearchPlacesAutocomplete extends StatefulWidget {
 
 class _PolarisSearchPlacesAutocompleteState
     extends State<PolarisSearchPlacesAutocomplete> {
-  final _controller = TextEditingController();
-  final _focus = FocusNode();
+  /// Text editing controller for the search input field.
+  final TextEditingController _controller = TextEditingController();
+
+  /// Focus node for managing focus state of the search input field.
+  final FocusNode _focus = FocusNode();
+
+  /// Overlay entry used to display the search results popup.
   OverlayEntry? _overlayEntry;
+
+  /// Layer link used for positioning the search results popup relative to the input field.
   final _layerLink = LayerLink();
+
+  /// Reference to the PlaceBloc instance for managing place search logic.
   late final PlaceBloc _placeBloc;
+
+  /// Reference to the MapBloc instance for handling map interactions.
   late final MapBloc _mapBloc;
+
+  /// Scroll controller for the search results list.
   final _scrollController = ScrollController();
+
+  /// The horizontal and vertical padding around the search popup.
   final _distanceBorders = 32.0;
 
+  /// Flag to track the previous focus state of the input field.
   bool _lastFocusValue = false;
 
   @override
   void initState() {
     super.initState();
+
+    // Access the PlaceBloc and MapBloc instances from the context.
     _placeBloc = context.read<PlaceBloc>();
     _mapBloc = context.read<MapBloc>();
 
+    // Add a listener to the focus node to show the popup when focus is gained and the query length is at least 3.
     _focus.addListener(() {
       final hasGainedFocus = _focus.hasFocus && !_lastFocusValue;
-
       if (hasGainedFocus && _controller.text.length >= 3) {
         _showPopup();
       }
@@ -99,11 +120,8 @@ class _PolarisSearchPlacesAutocompleteState
                         controller: _controller,
                         focusNode: _focus,
                         onChanged: (value) {
-                          print(value);
                           EasyDebounce.debounce(
                               "search_autocomplete", Durations.short2, () {
-                            // _placeBloc.add(ChangedText(value));
-
                             if (_overlayEntry == null && value.length >= 3) {
                               _showPopup();
                             } else if (_overlayEntry != null &&
@@ -121,7 +139,6 @@ class _PolarisSearchPlacesAutocompleteState
                           suffixIcon: IconButton(
                             onPressed: () {
                               _controller.clear();
-                              _placeBloc.add(ChangedText(''));
                               _removeOverlay();
                               _placeBloc.add(ToggledSearchPlacesVisibility());
                             },

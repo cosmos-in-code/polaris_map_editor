@@ -1,3 +1,4 @@
+/// Enum that defines the keyboard shortcuts.
 enum Shortcut {
   undo,
   redo,

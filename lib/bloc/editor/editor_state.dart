@@ -1,12 +1,17 @@
 part of 'editor_bloc.dart';
 
+/// Represents a state of the editor with a set of points.
 class Editor {
+  /// The list of geographic coordinates (LatLng) defining the points.
   final List<LatLng> points;
 
+  /// Creates an Editor instance with the given points.
   Editor(this.points);
 
+  /// Creates a copy of the Editor instance.
   Editor copy() => Editor([...points]);
 
+  /// Converts the points into a list of line segments connecting them.
   List<List<LatLng>> get lines {
     List<List<LatLng>> lines = [];
 
@@ -19,19 +24,28 @@ class Editor {
   }
 }
 
+/// Represents the overall state of the editor, including snapshots, forward snapshots, and dragging state.
 class EditorState {
+  /// List of past editor states (snapshots).
   final List<Editor> snapshots;
+
+  /// List of undoable editor states after a redo action.
   final List<Editor> fowardSnapshots;
+
+  /// Information about the currently dragged point (if any).
   final Drag? dragging;
 
+  /// Indicates if a point is currently being dragged.
   bool get isDragging => dragging != null;
 
+  /// Creates an EditorState instance with the specified snapshots, forward snapshots, and dragging state.
   const EditorState({
     this.snapshots = const [],
     this.fowardSnapshots = const [],
     this.dragging,
   });
 
+  /// Creates a copy of the EditorState with optional modifications.
   EditorState copyWith({
     List<Editor>? snapshots,
     List<Editor>? fowardSnapshots,
@@ -47,6 +61,7 @@ class EditorState {
     );
   }
 
+  /// Returns a list of points involved in the dragging operation, including neighbors if applicable.
   List<LatLng> get draggedPointWithNeighbors {
     if (dragging == null) {
       return [];
@@ -55,10 +70,12 @@ class EditorState {
     final result = <LatLng>[];
 
     if (dragging!.type == DragType.fromLine) {
+      // Include origin, destination, and other endpoint of the line
       result.add(dragging!.originLine![0]);
       result.add(dragging!.destination);
       result.add(dragging!.originLine![1]);
     } else if (dragging!.type == DragType.fromPoint) {
+      // Include dragged point, neighbors based on current points
       final points = (current?.points ?? []);
 
       if (points.length <= 1) {
@@ -82,5 +99,6 @@ class EditorState {
     return result;
   }
 
+  /// Returns the current editor state (last snapshot if any).
   Editor? get current => snapshots.isNotEmpty ? snapshots.last : null;
 }

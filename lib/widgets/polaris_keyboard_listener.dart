@@ -7,10 +7,15 @@ import 'package:polaris_map_editor/bloc/place/place_bloc.dart';
 import 'package:polaris_map_editor/enums/shortcut.dart';
 import 'package:polaris_map_editor/options/polaris_options.dart';
 
+/// Widget that listens to keyboard shortcuts and performs actions accordingly.
 class PolarisKeyboardListener extends StatefulWidget {
+  /// Configuration options for the keyboard shortcuts.
   final PolarisOptions options;
+
+  /// The widget to display within the listener.
   final Widget child;
 
+  /// Creates a PolarisKeyboardListener with the specified options and child.
   const PolarisKeyboardListener({
     super.key,
     required this.options,

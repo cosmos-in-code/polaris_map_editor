@@ -15,13 +15,24 @@ import 'package:polaris_map_editor/widgets/polaris_menu.dart';
 import 'package:polaris_map_editor/widgets/polaris_search_places_automplete.dart';
 import 'package:provider/provider.dart';
 
+/// Widget responsible for displaying the Polaris map editor.
 class PolarisMapEditor extends StatefulWidget {
+  /// The flutter map controller used to control the map.
   final MapController mapController;
+
+  /// Configuration options for the map editor.
   final PolarisOptions options;
+
+  /// The initial area of the map editor.
   final List<LatLng> initialArea;
+
+  /// The widget to display within the map editor.
   final Widget child;
+
+  /// Called when the area changes.
   final Function(List<LatLng> area)? onAreaChanged;
 
+  /// Creates a PolarisMapEditor with the specified options and child.
   PolarisMapEditor({
     super.key,
     required this.mapController,
@@ -111,10 +122,7 @@ class _PolarisMapEditorState extends State<PolarisMapEditor> {
                   children: [
                     PolarisKeyboardListener(
                       options: widget.options,
-                      child: IgnorePointer(
-                        ignoring: placeState.isShow,
-                        child: widget.child,
-                      ),
+                      child: widget.child,
                     ),
                     PolarisMenu(
                       options: widget.options,
