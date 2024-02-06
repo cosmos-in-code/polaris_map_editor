@@ -3,7 +3,7 @@
 PolarisMapEditor is a Flutter library for creating map editors with a celestial touch, allowing users to interactively draw areas on the map. The library is inspired by the concept of Polaris, the North Star, providing a reliable point of reference.
 
 
-![Example](https://github.com/cosmos-in-code/polaris_map_editor/blob/main/docs/example.gif?raw=true)
+![Example](https://github.com/cosmos-in-code/polaris_map_editor/blob/main/doc/example.gif?raw=true)
 
 
 ## Getting started
