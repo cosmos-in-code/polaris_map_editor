@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:polaris_map_editor/models/polaris_options.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:polaris_map_editor/options/polaris_options.dart';
 import 'package:polaris_map_editor/widgets/layers/area_layer.dart';
 import 'package:polaris_map_editor/widgets/layers/lines_layer.dart';
 import 'package:polaris_map_editor/widgets/layers/points_layer.dart';
 
 class PolarisLayer extends StatelessWidget {
-  final PolarisOptions options;
-
   const PolarisLayer({
     super.key,
-    required this.options,
   });
 
   @override
   Widget build(BuildContext context) {
+    final options = context.read<PolarisOptions>();
     return Stack(
       children: [
         AreaLayer(

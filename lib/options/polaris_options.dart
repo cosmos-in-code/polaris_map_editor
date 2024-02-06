@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:polaris_map_editor/models/area_options.dart';
-import 'package:polaris_map_editor/models/line_options.dart';
-import 'package:polaris_map_editor/models/mouse_options.dart';
-import 'package:polaris_map_editor/models/place_options.dart';
-import 'package:polaris_map_editor/models/point_options.dart';
-import 'package:polaris_map_editor/models/shortcut_options.dart';
+import 'package:polaris_map_editor/options/area_options.dart';
+import 'package:polaris_map_editor/options/line_options.dart';
+import 'package:polaris_map_editor/options/menu_options.dart';
+import 'package:polaris_map_editor/options/mouse_options.dart';
+import 'package:polaris_map_editor/options/place_options.dart';
+import 'package:polaris_map_editor/options/point_options.dart';
+import 'package:polaris_map_editor/options/shortcut_options.dart';
 
 class PolarisOptions {
   final AreaOptions area;
@@ -16,6 +17,7 @@ class PolarisOptions {
   final PlaceOptions? place;
   final MouseOptions mouse;
   final ShortcutOptions shortcut;
+  final MenuOptions menu;
 
   bool get isEnabledPlace => place != null;
 
@@ -26,6 +28,7 @@ class PolarisOptions {
     required this.point,
     required this.place,
     required this.shortcut,
+    required this.menu,
     this.mouse = const MouseOptions(),
   });
 
@@ -34,6 +37,9 @@ class PolarisOptions {
     String? googlePlaceApiKey,
   }) {
     return PolarisOptions(
+      menu: const MenuOptions(
+        enabled: true,
+      ),
       area: AreaOptions(
         color: color.withOpacity(0.3),
         isFilled: true,
@@ -128,6 +134,7 @@ class PolarisOptions {
   }
 
   PolarisOptions copyWith({
+    MenuOptions? menu,
     AreaOptions? area,
     LineOptions? line,
     LineOptions? draggedLine,
@@ -137,6 +144,7 @@ class PolarisOptions {
     ShortcutOptions? shortcut,
   }) {
     return PolarisOptions(
+      menu: menu ?? this.menu,
       area: area ?? this.area,
       line: line ?? this.line,
       draggedLine: draggedLine ?? this.draggedLine,

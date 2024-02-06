@@ -1,11 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:galactic_hotkeys/galactic_hotkeys.dart';
 import 'package:polaris_map_editor/bloc/editor/editor_bloc.dart';
-import 'package:polaris_map_editor/models/polaris_options.dart';
+import 'package:polaris_map_editor/options/polaris_options.dart';
 
 class PointsLayer extends StatelessWidget {
   final PolarisOptions options;
@@ -61,7 +60,6 @@ class PointsLayer extends StatelessWidget {
                   return MouseRegion(
                     cursor: cursor,
                     child: GestureDetector(
-                      dragStartBehavior: DragStartBehavior.down,
                       onTap: () {
                         if (deleteIsPessed) {
                           editorBloc.add(DeletedPoint(point));
@@ -97,10 +95,16 @@ class PointsLayer extends StatelessWidget {
           markers.add(
             Marker(
               point: editorState.dragging!.destination,
-              child: const Icon(
-                Icons.circle,
-                color: Colors.blue,
-                size: 14,
+              child: Builder(
+                builder: (context) {
+                  // final originIsLast = editorState.dragging!.origin ==
+                  if (options.point.custom) {
+                    return options.point.builder!(
+                        context, editorState.dragging!.destination, false);
+                  } else {
+                    return options.point.icon!;
+                  }
+                },
               ),
             ),
           );

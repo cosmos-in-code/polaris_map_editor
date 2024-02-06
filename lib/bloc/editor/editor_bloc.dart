@@ -12,8 +12,13 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
   final double lineStrokeWidth;
 
   EditorBloc({
-    this.lineStrokeWidth = 5,
-  }) : super(const EditorState()) {
+    required List<LatLng> initialArea,
+    required this.lineStrokeWidth,
+  }) : super(
+          initialArea.isNotEmpty
+              ? EditorState(snapshots: [Editor(initialArea)])
+              : const EditorState(),
+        ) {
     on<AddedPoint>((event, emit) {
       if (_isPointOnLine(event.point)) {
         return;

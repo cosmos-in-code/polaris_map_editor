@@ -1,6 +1,7 @@
 part of 'map_bloc.dart';
 
-@immutable
-abstract class MapState {}
+class MapState {
+  final MapController mapController;
 
-class MapInitial extends MapState {}
+  const MapState({required this.mapController});
+}

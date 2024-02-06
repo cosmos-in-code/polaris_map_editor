@@ -8,6 +8,12 @@ class RequestedFindPlace extends PlaceEvent {
   RequestedFindPlace(this.queryString);
 }
 
+class ChangedText extends PlaceEvent {
+  final String text;
+
+  ChangedText(this.text);
+}
+
 class RetriedFindPlace extends PlaceEvent {
   RetriedFindPlace();
 }

@@ -1,4 +1,26 @@
 library polaris_map_editor;
 
 export 'package:polaris_map_editor/contracts/place_repository.dart';
-export 'package:polaris_map_editor/widgets/polaris_map_editor_widget.dart';
+export 'package:polaris_map_editor/enums/drag_type.dart';
+export 'package:polaris_map_editor/enums/shortcut.dart';
+export 'package:polaris_map_editor/models/place.dart';
+export 'package:polaris_map_editor/options/area_options.dart';
+export 'package:polaris_map_editor/options/line_options.dart';
+export 'package:polaris_map_editor/options/menu_options.dart';
+export 'package:polaris_map_editor/options/mouse_options.dart';
+export 'package:polaris_map_editor/options/place_options.dart';
+export 'package:polaris_map_editor/options/point_options.dart';
+export 'package:polaris_map_editor/options/polaris_options.dart';
+export 'package:polaris_map_editor/options/shortcut_options.dart';
+export 'package:polaris_map_editor/widgets/layers/area_layer.dart';
+export 'package:polaris_map_editor/widgets/layers/lines_layer.dart';
+export 'package:polaris_map_editor/widgets/layers/points_layer.dart';
+export 'package:polaris_map_editor/widgets/menu/divider_vertical.dart';
+export 'package:polaris_map_editor/widgets/menu/fit_camera_to_area_button.dart';
+export 'package:polaris_map_editor/widgets/menu/redo_button.dart';
+export 'package:polaris_map_editor/widgets/menu/search_place_button.dart';
+export 'package:polaris_map_editor/widgets/menu/undo_button.dart';
+export 'package:polaris_map_editor/widgets/menu/zoom_in_button.dart';
+export 'package:polaris_map_editor/widgets/menu/zoom_out_button.dart';
+export 'package:polaris_map_editor/widgets/polaris_layer.dart';
+export 'package:polaris_map_editor/widgets/polaris_map_editor.dart';

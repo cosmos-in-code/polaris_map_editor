@@ -11,7 +11,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   MapBloc({
     required this.mapController,
-  }) : super(MapInitial()) {
+  }) : super(MapState(mapController: mapController)) {
     on<RequestedFitCameraToArea>((event, emit) {
       mapController.fitCamera(CameraFit.bounds(
         bounds: LatLngBounds.fromPoints(event.area),

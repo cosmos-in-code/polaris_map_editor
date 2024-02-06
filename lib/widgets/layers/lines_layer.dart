@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:polaris_map_editor/bloc/editor/editor_bloc.dart';
-import 'package:polaris_map_editor/models/polaris_options.dart';
+import 'package:polaris_map_editor/options/polaris_options.dart';
 import 'package:polaris_map_editor/support/helpers.dart';
 
 class LinesLayer extends StatelessWidget {

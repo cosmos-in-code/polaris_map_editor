@@ -12,8 +12,6 @@ part 'place_state.dart';
 class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   final PlaceRepository repository;
   int _version = 0;
-  final _durationIdleToHideSearchPlace = const Duration(seconds: 10);
-  Timer? _timerToHide;
 
   PlaceBloc({
     required this.repository,
@@ -29,18 +27,9 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
       emit(state.copyWith(
         isShow: true,
       ));
-
-      _timerToHide?.cancel();
-      if (state.queryString.isEmpty) {
-        _timerToHide = Timer(_durationIdleToHideSearchPlace, () {
-          add(RequestedHideSearchPlacesField());
-        });
-      }
     });
 
     on<RequestedHideSearchPlacesField>((event, emit) {
-      _timerToHide?.cancel();
-
       emit(state.copyWith(
         isShow: false,
       ));
@@ -52,6 +41,12 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
       } else {
         add(RequestedShowSearchPlacesField());
       }
+    });
+
+    on<ChangedText>((event, emit) {
+      emit(state.copyWith(
+        queryString: event.text,
+      ));
     });
   }
 
