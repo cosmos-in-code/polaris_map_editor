@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:meta/meta.dart';
 import 'package:polaris_map_editor/enums/drag_type.dart';
 import 'package:polaris_map_editor/models/drag.dart';
 import 'package:polaris_map_editor/support/helpers.dart';
