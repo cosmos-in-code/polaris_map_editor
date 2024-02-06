@@ -1,7 +1,7 @@
 name: polaris_map_editor
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "PolarisMapEditor is a library for creating map editors with a celestial touch, allowing users to interactively draw areas on the map."
+version: 1.0.0
+homepage: https://github.com/cosmos-in-code/polaris_map_editor
 
 environment:
   sdk: '>=3.2.2 <4.0.0'
