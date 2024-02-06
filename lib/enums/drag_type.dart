@@ -1,0 +1,4 @@
+enum DragType {
+  fromPoint,
+  fromLine,
+}
