@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:polaris_map_editor/options/menu_options.dart';
 import 'package:polaris_map_editor/options/polaris_options.dart';
 import 'package:polaris_map_editor/widgets/menu/divider_vertical.dart';
 import 'package:polaris_map_editor/widgets/menu/fit_camera_to_area_button.dart';
@@ -32,14 +33,17 @@ class PolarisMenu extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const UndoButton(),
-                const RedoButton(),
-                const DividerVertical(),
-                const ZoomOutButton(),
-                const ZoomInButton(),
-                const FitCameraToAreaButton(),
-                const DividerVertical(),
-                if (options.isEnabledPlace) const SearchPlaceButton(),
+                for (final item in options.menu.items) ...[
+                  if (item == MenuItem.undo) const UndoButton(),
+                  if (item == MenuItem.redo) const RedoButton(),
+                  if (item == MenuItem.divider) const DividerVertical(),
+                  if (item == MenuItem.zoomIn) const ZoomInButton(),
+                  if (item == MenuItem.zoomOut) const ZoomOutButton(),
+                  if (item == MenuItem.fitCameraToArea)
+                    const FitCameraToAreaButton(),
+                  if (item == MenuItem.search && options.isEnabledPlace)
+                    const SearchPlaceButton(),
+                ]
               ],
             ),
           ),
