@@ -102,12 +102,11 @@ class _PolarisMapEditorState extends State<PolarisMapEditor> {
             mapController: widget.mapController,
           ),
         ),
-        if (widget.options.isEnabledPlace)
-          BlocProvider(
-            create: (context) => PlaceBloc(
-              repository: widget.options.place!.repository,
-            ),
+        BlocProvider(
+          create: (context) => PlaceBloc(
+            repository: widget.options.place?.repository,
           ),
+        ),
       ],
       child: BlocBuilder<PlaceBloc, PlaceState>(
         builder: (context, placeState) {

@@ -12,7 +12,7 @@ part 'place_state.dart';
 /// Bloc for managing the state of places related to search and display.
 class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   /// Repository for interacting with place data.
-  final PlaceRepository repository;
+  final PlaceRepository? repository;
 
   /// Counter to track versions of search requests.
   int _version = 0;
@@ -57,6 +57,10 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     PlaceState state,
     String queryString,
   ) async {
+    if (repository == null) {
+      return;
+    }
+
     emit(state.copyWith(queryString: queryString));
 
     if (queryString.isEmpty || queryString == state.queryString) {
@@ -67,7 +71,7 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     int tmpVersion = ++_version;
 
     try {
-      final places = await repository.findPlaces(queryString);
+      final places = await repository!.findPlaces(queryString);
 
       if (tmpVersion != _version) {
         return;
