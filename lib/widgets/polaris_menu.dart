@@ -34,9 +34,12 @@ class PolarisMenu extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 for (final item in options.menu.items) ...[
-                  if (item == MenuItem.undo) const UndoButton(),
-                  if (item == MenuItem.redo) const RedoButton(),
-                  if (item == MenuItem.divider) const DividerVertical(),
+                  if (item == MenuItem.undo && !options.readingMode)
+                    const UndoButton(),
+                  if (item == MenuItem.redo && !options.readingMode)
+                    const RedoButton(),
+                  if (item == MenuItem.divider && !options.readingMode)
+                    const DividerVertical(),
                   if (item == MenuItem.zoomIn) const ZoomInButton(),
                   if (item == MenuItem.zoomOut) const ZoomOutButton(),
                   if (item == MenuItem.fitCameraToArea)

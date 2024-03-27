@@ -60,6 +60,10 @@ class PointsLayer extends StatelessWidget {
                     child = options.point.icon!;
                   }
 
+                  if (options.readingMode) {
+                    return child;
+                  }
+
                   return MouseRegion(
                     cursor: cursor,
                     child: GestureDetector(

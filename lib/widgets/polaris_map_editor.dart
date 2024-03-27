@@ -61,6 +61,10 @@ class _PolarisMapEditorState extends State<PolarisMapEditor> {
       lineStrokeWidth: widget.options.line.strokeWidth,
     );
 
+    if (widget.options.readingMode) {
+      return;
+    }
+
     if (widget.onAreaChanged != null) {
       _subscriptionEditorState = _editorBloc.stream.listen((event) {
         final points = event.current?.points ?? [];

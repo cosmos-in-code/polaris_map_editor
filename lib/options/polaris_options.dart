@@ -10,6 +10,8 @@ import 'package:polaris_map_editor/options/shortcut_options.dart';
 
 /// Class that defines the overall customization options for the `PolarisMapEditor`.
 class PolarisOptions {
+  final bool readingMode;
+
   /// Customization options for areas.
   final AreaOptions area;
 
@@ -39,6 +41,7 @@ class PolarisOptions {
 
   /// Default constructor.
   const PolarisOptions({
+    this.readingMode = false,
     required this.area,
     required this.line,
     required this.draggedLine,
@@ -51,10 +54,12 @@ class PolarisOptions {
 
   /// Factory that creates a `PolarisOptions` object with default options.
   factory PolarisOptions.defaultOptions({
+    bool readingMode = false,
     Color color = Colors.blue,
     String? googlePlaceApiKey,
   }) {
     return PolarisOptions(
+      readingMode: readingMode,
       menu: const MenuOptions(
         enabled: true,
       ),
@@ -97,29 +102,35 @@ class PolarisOptions {
           ? PlaceOptions.googleMapService(apiKey: googlePlaceApiKey)
           : null,
       mouse: const MouseOptions(),
-      shortcut: const ShortcutOptions(
-        undo: [
-          [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyZ],
-          [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyZ],
-        ],
-        redo: [
-          [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyY],
-          [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyY],
-          [
-            LogicalKeyboardKey.controlLeft,
-            LogicalKeyboardKey.shiftLeft,
-            LogicalKeyboardKey.keyZ
-          ],
-          [
-            LogicalKeyboardKey.metaLeft,
-            LogicalKeyboardKey.shiftLeft,
-            LogicalKeyboardKey.keyZ
-          ],
-        ],
-        search: [
-          [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyF],
-          [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyF],
-        ],
+      shortcut: ShortcutOptions(
+        undo: !readingMode
+            ? [
+                [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyZ],
+                [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyZ],
+              ]
+            : [],
+        redo: !readingMode
+            ? [
+                [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyY],
+                [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyY],
+                [
+                  LogicalKeyboardKey.controlLeft,
+                  LogicalKeyboardKey.shiftLeft,
+                  LogicalKeyboardKey.keyZ
+                ],
+                [
+                  LogicalKeyboardKey.metaLeft,
+                  LogicalKeyboardKey.shiftLeft,
+                  LogicalKeyboardKey.keyZ
+                ],
+              ]
+            : [],
+        search: googlePlaceApiKey != null
+            ? [
+                [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyF],
+                [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyF],
+              ]
+            : [],
         zoomIn: [
           [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.add],
           [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.equal],
@@ -144,9 +155,11 @@ class PolarisOptions {
           [LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.keyH],
           [LogicalKeyboardKey.metaLeft, LogicalKeyboardKey.keyH],
         ],
-        deletePoint: [
-          [LogicalKeyboardKey.controlLeft],
-        ],
+        deletePoint: !readingMode
+            ? [
+                [LogicalKeyboardKey.controlLeft],
+              ]
+            : [],
       ),
     );
   }
