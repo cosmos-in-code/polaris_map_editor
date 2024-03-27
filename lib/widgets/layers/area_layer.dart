@@ -23,7 +23,7 @@ class AreaLayer extends StatelessWidget {
         // Renders a polygon layer representing the drawn area.
         polygons: [
           // Only show the polygon if there are at least 3 points to define an area.
-          if (state.snapshots.length > 2)
+          if ((state.current?.points ?? []).length > 2)
             Polygon(
               // Defines the polygon points based on the current editor state.
               points: state.current!.points,
