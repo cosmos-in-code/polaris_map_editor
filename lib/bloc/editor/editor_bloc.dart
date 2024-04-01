@@ -56,7 +56,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
     });
 
     on<Undid>((event, emit) {
-      if (state.snapshots.isNotEmpty) {
+      if (state.snapshots.length > 1) {
         final newSnapshots =
             state.snapshots.sublist(0, state.snapshots.length - 1);
         final forwardSnapshots = [...state.fowardSnapshots];
