@@ -48,7 +48,7 @@ class PolarisMapEditor extends StatefulWidget {
 
 class _PolarisMapEditorState extends State<PolarisMapEditor> {
   late final EditorBloc _editorBloc;
-  late final StreamSubscription<flutter_map.MapEvent> _subscriptionMapEvent;
+  late final StreamSubscription<flutter_map.MapEvent>? _subscriptionMapEvent;
   late final StreamSubscription<EditorState>? _subscriptionEditorState;
   final _focusScopeNode = FocusScopeNode();
   var _currentArea = <LatLng>[];
@@ -62,6 +62,8 @@ class _PolarisMapEditorState extends State<PolarisMapEditor> {
     );
 
     if (widget.options.readingMode) {
+      _subscriptionMapEvent = null;
+      _subscriptionEditorState = null;
       return;
     }
 
@@ -88,7 +90,7 @@ class _PolarisMapEditorState extends State<PolarisMapEditor> {
   @override
   void dispose() {
     _subscriptionEditorState?.cancel();
-    _subscriptionMapEvent.cancel();
+    _subscriptionMapEvent?.cancel();
     _editorBloc.close();
     _focusScopeNode.dispose();
     super.dispose();
