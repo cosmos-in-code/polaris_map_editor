@@ -19,7 +19,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
   }) : super(
           initialArea.isNotEmpty
               ? EditorState(snapshots: [Editor(initialArea)])
-              : const EditorState(),
+              : EditorState(snapshots: [Editor([])]),
         ) {
     on<AddedPoint>((event, emit) {
       if (_isPointOnLine(event.point)) {
@@ -37,7 +37,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
 
     on<DeletedPoint>((event, emit) {
       final current = state.snapshots.last;
-      final newSnapshot = current.copy();
+      final newSnapshot = current.copyAndIncrementVersion();
 
       for (var i = 0; i < current.points.length; i++) {
         if (current.points[i] == event.point) {
@@ -56,19 +56,21 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
     });
 
     on<Undid>((event, emit) {
-      if (state.snapshots.length > 1) {
-        final newSnapshots =
-            state.snapshots.sublist(0, state.snapshots.length - 1);
-        final forwardSnapshots = [...state.fowardSnapshots];
-
-        forwardSnapshots.add(state.snapshots.last);
-
-        emit(state.copyWith(
-          snapshots: newSnapshots,
-          fowardSnapshots: forwardSnapshots,
-          clearFowardSnapshots: false,
-        ));
+      if (state.snapshots.isEmpty || state.snapshots.last.version == 0) {
+        return;
       }
+
+      final newSnapshots =
+          state.snapshots.sublist(0, state.snapshots.length - 1);
+      final forwardSnapshots = [...state.fowardSnapshots];
+
+      forwardSnapshots.add(state.snapshots.last);
+
+      emit(state.copyWith(
+        snapshots: newSnapshots,
+        fowardSnapshots: forwardSnapshots,
+        clearFowardSnapshots: false,
+      ));
     });
 
     on<Redid>((event, emit) {
@@ -142,7 +144,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
       }
 
       final current = state.snapshots.last;
-      final newSnapshot = current.copy();
+      final newSnapshot = current.copyAndIncrementVersion();
 
       for (var i = 0; i < current.points.length; i++) {
         if (current.points[i] == event.point) {
@@ -168,7 +170,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
 
       final current = state.current!;
 
-      final newSnapshot = current.copy();
+      final newSnapshot = current.copyAndIncrementVersion();
 
       for (var i = 0; i < current.points.length; i++) {
         final currentPoint = current.points[i];
@@ -198,7 +200,7 @@ class EditorBloc extends Bloc<EditorEvent, EditorState> {
       return Editor([point]);
     }
 
-    return Editor([...current.points, point]);
+    return Editor([...current.points, point], version: current.version + 1);
   }
 
   /// Checks if the given point is on a line segment.

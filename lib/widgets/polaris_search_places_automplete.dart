@@ -111,9 +111,9 @@ class _PolarisSearchPlacesAutocompleteState
                 top: _distanceBorders,
                 left: _distanceBorders,
                 right: _distanceBorders,
-                child: Card(
-                  child: CompositedTransformTarget(
-                    link: _layerLink,
+                child: CompositedTransformTarget(
+                  link: _layerLink,
+                  child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
@@ -184,19 +184,16 @@ class _PolarisSearchPlacesAutocompleteState
           },
           child: CompositedTransformFollower(
             link: _layerLink,
-            targetAnchor: Alignment.bottomCenter,
-            followerAnchor: Alignment.topCenter,
+            targetAnchor: Alignment.bottomLeft,
+            followerAnchor: Alignment.topLeft,
             child: Material(
               color: Colors.transparent,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: _distanceBorders,
-                ),
+              child: Container(
                 child: Stack(
                   children: [
                     Card(
                       child: SizedBox(
-                        width: _layerLink.leaderSize!.width,
+                        width: _layerLink.leaderSize!.width - 8,
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
                             maxHeight: height,

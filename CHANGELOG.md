@@ -1,8 +1,12 @@
+## 0.0.4
+
+* Fix bugs
+
 ## 0.0.3
 
 * Add more menu options
 * Reading mode
-* Some bugs
+* Fix some bugs
 
 ## 0.0.2
 

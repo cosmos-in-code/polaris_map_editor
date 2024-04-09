@@ -4,12 +4,13 @@ part of 'editor_bloc.dart';
 class Editor {
   /// The list of geographic coordinates (LatLng) defining the points.
   final List<LatLng> points;
+  final int version;
 
   /// Creates an Editor instance with the given points.
-  Editor(this.points);
+  Editor(this.points, {this.version = 0});
 
   /// Creates a copy of the Editor instance.
-  Editor copy() => Editor([...points]);
+  Editor copyAndIncrementVersion() => Editor([...points], version: version + 1);
 
   /// Converts the points into a list of line segments connecting them.
   List<List<LatLng>> get lines {

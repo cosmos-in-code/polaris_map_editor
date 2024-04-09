@@ -17,9 +17,10 @@ class UndoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EditorBloc, EditorState>(
       builder: (context, state) => IconButton(
-        onPressed: state.snapshots.length > 1
-            ? () => context.read<EditorBloc>().add(Undid())
-            : null,
+        onPressed:
+            state.snapshots.isNotEmpty && state.snapshots.last.version > 0
+                ? () => context.read<EditorBloc>().add(Undid())
+                : null,
         icon: child,
       ),
     );
