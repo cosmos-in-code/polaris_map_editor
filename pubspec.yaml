@@ -1,6 +1,6 @@
 name: polaris_map_editor
 description: "PolarisMapEditor is a library for creating map editors with a celestial touch, allowing users to interactively draw areas on the map."
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/cosmos-in-code/polaris_map_editor
 
 environment:
